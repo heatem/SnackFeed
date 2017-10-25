@@ -10,27 +10,27 @@ import UIKit
 
 var snackSamples = [
     [
-        "created-at": "2017-10-23T11:00:28-04:00",
+        "created-at": "2017-10-24 11:00:28",
         "image-url": "apples.jpeg",
         "title": "Apples",
         "description": "Delicious green apples on the 4th floor.",
-        "thanks": 0,
+        "thanks": 8,
         "yums": 0,
         "username": "heather",
         "user-image-url": "meinart.jpg"
     ],
     [
-        "created-at": "2017-10-22T11:00:28-04:00",
+        "created-at": "2017-10-22 11:00:28",
         "image-url": "coffee.jpeg",
         "title": "Coffee",
         "description": "Three Ships and Philz coffee.",
         "thanks": 0,
-        "yums": 0,
+        "yums": 3,
         "username": "heather",
         "user-image-url": "meinart.jpg"
     ],
     [
-        "created-at": "2017-10-21T11:00:28-04:00",
+        "created-at": "2017-10-21 11:00:28",
         "image-url": "eggs.jpeg",
         "title": "Hardboiled Eggs in Shells in a Bowl",
         "description": "Eggs added to boiling water and boiled for 10 minutes. Unpeeled. Great with a light sprinkle of cayenne pepper.",
@@ -40,7 +40,7 @@ var snackSamples = [
         "user-image-url": "meinart.jpg"
     ],
     [
-        "created-at": "2017-10-20T11:00:28-04:00",
+        "created-at": "2017-09-2 11:00:28",
         "image-url": "kimchi.jpg",
         "title": "Kimchi (Vegetarian)",
         "description": "Spicy kimchi, no fish.",
@@ -50,7 +50,7 @@ var snackSamples = [
         "user-image-url": ""
     ],
     [
-        "created-at": "2017-10-19T11:00:28-04:00",
+        "created-at": "2016-10-19 11:00:45",
         "image-url": "popcorn.jpeg",
         "title": "Sweet Jalapeno Popcorn",
         "description": "POP Mama POP Sweet Jalapeno Popcorn at Tech Inclusion 2017",
@@ -114,7 +114,7 @@ class ItemCell: UITableViewCell {
         userImage.layer.cornerRadius = 20
 //        userImage.layer.borderColor = UIColor.white.cgColor
 //        userImage.layer.borderWidth = 3
-        userImage.image = #imageLiteral(resourceName: "user.png")
+//        userImage.image = #imageLiteral(resourceName: "user.png")
         return userImage // return the image to the cell
     }()
 

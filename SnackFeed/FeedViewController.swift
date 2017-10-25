@@ -62,13 +62,117 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             if
                 let fileName = snackSamples[indexPath.row]["image-url"] as? String,
                 let image = UIImage(named: fileName),
-                let title = snackSamples[indexPath.row]["title"] as? String {
-                
+                let title = snackSamples[indexPath.row]["title"] as? String,
+                let createdAt = snackSamples[indexPath.row]["created-at"] as? String
+                /*
+ 
+ contentView.addSubview(reactionButton)
+ contentView.addSubview(snackItemLabel)
+ contentView.addSubview(userImageView)
+ contentView.addSubview(usernameLabel)
+ contentView.addSubview(commentLabel)
+ contentView.addSubview(commentCountLabel)
+ contentView.addSubview(reactionCountLabel)
+ contentView.addSubview(reactionLabel)
+ contentView.addSubview(yumLabel)
+                 
+                 */
+            {
                 itemCell.snackImageView.image = image
-                print(fileName)
                 itemCell.snackItemLabel.text = title
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                if let createdTime: Date = dateFormatter.date(from: createdAt) {
+                    itemCell.timeLabel.text = timeAgo(date: createdTime)
+                }
+                
+                
+                
             }
         }
         return cell
+    }
+    
+    func timeAgo(date:Date) -> String { // change any to Date
+        let calendar = Calendar.current
+        let unitFlags: Set<Calendar.Component> = [.second, .minute, .hour, .day, .weekOfYear, .month, .year]
+        let now = Date()
+        let oldest = now < date ? now : date
+        let newest = (oldest == now) ? date : now
+        let components = calendar.dateComponents(unitFlags, from: oldest, to: newest)
+        
+        if
+            let years = components.year,
+            let months = components.month,
+            let weeks = components.weekOfYear,
+            let days = components.day,
+            let hours = components.hour,
+            let minutes = components.minute,
+            let seconds = components.second
+        {
+            if years >= 2 {
+                print("\(years)")
+                return "\(years) years ago"
+            }
+            if years >= 1 {
+                if months >= 1 {
+                    print("\(years)")
+                    return "Over a year ago"
+                } else {
+                    print("\(years)")
+                    return "Last year"
+                }
+            }
+            if months >= 2 {
+                print("\(months)")
+                return "\(months) months ago"
+            }
+            if months >= 1 {
+                print("\(months)")
+                return "Last month"
+            }
+            if weeks >= 2 {
+                print("\(weeks)")
+                return "\(weeks) weeks ago"
+            }
+            if weeks >= 1 {
+                print("\(weeks)")
+                return "Last week"
+            }
+            if days >= 2 {
+                print("\(days)")
+                return "\(days) days ago"
+            }
+            if days >= 1 {
+                print("\(weeks)")
+                return "Yesterday"
+            }
+            if hours >= 2 {
+                print("\(hours)")
+                return "\(hours) hours ago"
+            }
+            if hours >= 1 {
+                print("\(hours)")
+                return "An hour ago"
+            }
+            if minutes >= 2 {
+                print("\(minutes)")
+                return "\(minutes) minutes ago"
+            }
+            if minutes >= 1 {
+                print("\(minutes)")
+                return "A minute ago"
+            }
+            if seconds >= 10 {
+                print("\(seconds)")
+                return "\(seconds) seconds ago"
+            }
+            if seconds < 10 {
+                print("\(seconds)")
+                return "Just now"
+            }
+        }
+        return "Date unknown"
     }
 }
