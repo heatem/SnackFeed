@@ -64,8 +64,8 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 let image = UIImage(named: fileName),
                 let title = snackSamples[indexPath.row]["title"] as? String,
                 let createdAt = snackSamples[indexPath.row]["created-at"] as? String,
-                let thanksCount = snackSamples[indexPath.row]["thanks"] as? String,
-                let reactionCount = snackSamples[indexPath.row]["yums"] as? String
+                let thanksCount = snackSamples[indexPath.row]["thanks"] as? Int,
+                let reactionCount = snackSamples[indexPath.row]["yums"] as? Int
             {
                 itemCell.snackImageView.image = image
                 itemCell.snackItemLabel.text = title
