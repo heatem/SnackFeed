@@ -76,7 +76,6 @@ class ItemCell: UITableViewCell {
     // time label ("23 minutes ago")
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         label.textColor = .white
         label.font = UIFont(name: "Helvetica", size: 18)
         label.text = "23 minutes ago"
@@ -87,7 +86,7 @@ class ItemCell: UITableViewCell {
     let reactionButton: UIButton = {
         let button = UIButton()
         button.clipsToBounds = true
-        button.backgroundColor = UIColor.darkGray
+        button.backgroundColor = UIColor.red
         button.layer.cornerRadius = 20
         button.titleLabel?.font = UIFont(name: "SnackFeed", size: 22)
         button.setTitle("h", for: .normal)
@@ -97,7 +96,6 @@ class ItemCell: UITableViewCell {
     // title
     let snackItemLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.numberOfLines = 3
         label.textColor = .white

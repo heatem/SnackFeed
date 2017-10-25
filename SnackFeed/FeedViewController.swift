@@ -63,32 +63,21 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 let fileName = snackSamples[indexPath.row]["image-url"] as? String,
                 let image = UIImage(named: fileName),
                 let title = snackSamples[indexPath.row]["title"] as? String,
-                let createdAt = snackSamples[indexPath.row]["created-at"] as? String
-                /*
- 
- contentView.addSubview(reactionButton)
- contentView.addSubview(snackItemLabel)
- contentView.addSubview(userImageView)
- contentView.addSubview(usernameLabel)
- contentView.addSubview(commentLabel)
- contentView.addSubview(commentCountLabel)
- contentView.addSubview(reactionCountLabel)
- contentView.addSubview(reactionLabel)
- contentView.addSubview(yumLabel)
-                 
-                 */
+                let createdAt = snackSamples[indexPath.row]["created-at"] as? String,
+                let thanksCount = snackSamples[indexPath.row]["thanks"] as? String,
+                let reactionCount = snackSamples[indexPath.row]["yums"] as? String
             {
                 itemCell.snackImageView.image = image
                 itemCell.snackItemLabel.text = title
-                
+            
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
                 if let createdTime: Date = dateFormatter.date(from: createdAt) {
                     itemCell.timeLabel.text = timeAgo(date: createdTime)
                 }
-                
-                
-                
+            
+                itemCell.commentCountLabel.text = String(thanksCount)
+                itemCell.reactionCountLabel.text = String(reactionCount)
             }
         }
         return cell
