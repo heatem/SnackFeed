@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 var snackSamples = [
     [
@@ -46,8 +47,8 @@ var snackSamples = [
         "description": "Spicy kimchi, no fish.",
         "thanks": 0,
         "yums": 0,
-        "username": "",
-        "user-image-url": ""
+        "username": "anonymous",
+        "user-image-url": "eggs.jpeg"
     ],
     [
         "created-at": "2016-10-19 11:00:45",
@@ -57,11 +58,12 @@ var snackSamples = [
         "thanks": 0,
         "yums": 0,
         "username": "heather",
-        "user-image-url": ""
+        "user-image-url": "meinart.jpg"
     ]
 ]
 
 class ItemCell: UITableViewCell {
+    
     
     // add elements like image, title, etc. to the cell. Don't forget to add to the init function and add any constraints
     // image
@@ -77,7 +79,7 @@ class ItemCell: UITableViewCell {
     let timeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont(name: "Helvetica", size: 18)
+        label.font = UIFont(name: "Helvetica", size: 20)
         label.text = "23 minutes ago"
         return label
     }()
@@ -86,8 +88,9 @@ class ItemCell: UITableViewCell {
     let reactionButton: UIButton = {
         let button = UIButton()
         button.clipsToBounds = true
-        button.backgroundColor = UIColor.red
+        button.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         button.layer.cornerRadius = 20
+        button.setTitleColor(UIColor.red.withAlphaComponent(0.5), for: .normal)
         button.titleLabel?.font = UIFont(name: "SnackFeed", size: 22)
         button.setTitle("h", for: .normal)
         return button
@@ -99,7 +102,7 @@ class ItemCell: UITableViewCell {
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.numberOfLines = 3
         label.textColor = .white
-        label.font = UIFont(name: "Helvetica", size: 24)
+        label.font = UIFont(name: "Helvetica", size: 34)
         label.text = "A Delicious Snack"
         return label
     }()
@@ -127,7 +130,6 @@ class ItemCell: UITableViewCell {
 //     comment count
     let commentCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "23"
         return label
     }()
 
@@ -135,11 +137,12 @@ class ItemCell: UITableViewCell {
     let commentLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true // limits image to the confines of the view
-        label.backgroundColor = UIColor.gray
+        label.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         label.layer.cornerRadius = 20
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 3
         label.font = UIFont(name: "SnackFeed", size: 22)
+        label.textColor = UIColor.green.withAlphaComponent(0.5)
         label.textAlignment = NSTextAlignment.center
         label.text = "b"
         
@@ -158,11 +161,12 @@ class ItemCell: UITableViewCell {
     let reactionLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true // limits image to the confines of the view
-        label.backgroundColor = UIColor.gray
+        label.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         label.layer.cornerRadius = 20
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 3
         label.font = UIFont(name: "SnackFeed", size: 22)
+        label.textColor = UIColor.red.withAlphaComponent(0.5)
         label.textAlignment = NSTextAlignment.center
         label.text = "h"
         return label // return the image to the cell
@@ -171,11 +175,12 @@ class ItemCell: UITableViewCell {
     let yumLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true
-        label.backgroundColor = UIColor.gray
+        label.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         label.layer.cornerRadius = 20
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 3
         label.font = UIFont(name: "SnackFeed", size: 22)
+        label.textColor = UIColor.blue.withAlphaComponent(0.5)
         label.textAlignment = NSTextAlignment.center
         label.text = "q"
         return label
@@ -214,7 +219,7 @@ class ItemCell: UITableViewCell {
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         timeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        timeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        timeLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         timeLabel.widthAnchor.constraint(equalToConstant: frame.size.width - 60).isActive = true
 
         reactionButton.translatesAutoresizingMaskIntoConstraints = false
@@ -227,7 +232,6 @@ class ItemCell: UITableViewCell {
         snackItemLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         snackItemLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         snackItemLabel.bottomAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: -10).isActive = true
-        snackItemLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
         userImageView.translatesAutoresizingMaskIntoConstraints = false
         userImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
@@ -260,7 +264,7 @@ class ItemCell: UITableViewCell {
         reactionCountLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
         reactionLabel.translatesAutoresizingMaskIntoConstraints = false
-        reactionLabel.trailingAnchor.constraint(equalTo: yumLabel.leadingAnchor, constant: 8).isActive = true
+        reactionLabel.trailingAnchor.constraint(equalTo: yumLabel.leadingAnchor, constant: 6).isActive = true
         reactionLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 8).isActive = true
         reactionLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         reactionLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true

@@ -53,29 +53,33 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        tableView.allowsSelection = false
         // create a reusable cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
         // create the ItemCell class then come back here
         // add the contents of the cell
         if let itemCell = cell as? ItemCell {
-            print(snackSamples[indexPath.row]["image-url"])
             if
                 let fileName = snackSamples[indexPath.row]["image-url"] as? String,
                 let image = UIImage(named: fileName),
                 let title = snackSamples[indexPath.row]["title"] as? String,
                 let createdAt = snackSamples[indexPath.row]["created-at"] as? String,
+                let userImageURL = snackSamples[indexPath.row]["user-image-url"] as? String,
+                let userImage = UIImage(named: userImageURL),
+                let usernameDisplay = snackSamples[indexPath.row]["username"] as? String,
                 let thanksCount = snackSamples[indexPath.row]["thanks"] as? Int,
                 let reactionCount = snackSamples[indexPath.row]["yums"] as? Int
             {
                 itemCell.snackImageView.image = image
                 itemCell.snackItemLabel.text = title
-            
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
                 if let createdTime: Date = dateFormatter.date(from: createdAt) {
                     itemCell.timeLabel.text = timeAgo(date: createdTime)
                 }
-            
+                
+                itemCell.userImageView.image = userImage
+                itemCell.usernameLabel.text = usernameDisplay
                 itemCell.commentCountLabel.text = String(thanksCount)
                 itemCell.reactionCountLabel.text = String(reactionCount)
             }
@@ -101,64 +105,49 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             let seconds = components.second
         {
             if years >= 2 {
-                print("\(years)")
                 return "\(years) years ago"
             }
             if years >= 1 {
                 if months >= 1 {
-                    print("\(years)")
                     return "Over a year ago"
                 } else {
-                    print("\(years)")
                     return "Last year"
                 }
             }
             if months >= 2 {
-                print("\(months)")
                 return "\(months) months ago"
             }
             if months >= 1 {
-                print("\(months)")
                 return "Last month"
             }
             if weeks >= 2 {
-                print("\(weeks)")
                 return "\(weeks) weeks ago"
             }
             if weeks >= 1 {
-                print("\(weeks)")
                 return "Last week"
             }
             if days >= 2 {
-                print("\(days)")
                 return "\(days) days ago"
             }
             if days >= 1 {
-                print("\(weeks)")
                 return "Yesterday"
             }
             if hours >= 2 {
-                print("\(hours)")
                 return "\(hours) hours ago"
             }
             if hours >= 1 {
-                print("\(hours)")
                 return "An hour ago"
             }
             if minutes >= 2 {
-                print("\(minutes)")
                 return "\(minutes) minutes ago"
             }
             if minutes >= 1 {
-                print("\(minutes)")
                 return "A minute ago"
             }
             if seconds >= 10 {
-                print("\(seconds)")
                 return "\(seconds) seconds ago"
             }
             if seconds < 10 {
-                print("\(seconds)")
                 return "Just now"
             }
         }
