@@ -88,9 +88,9 @@ class ItemCell: UITableViewCell {
     let reactionButton: UIButton = {
         let button = UIButton()
         button.clipsToBounds = true
-        button.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
+        button.backgroundColor = UIColor.lightGray
         button.layer.cornerRadius = 20
-        button.setTitleColor(UIColor.red.withAlphaComponent(0.5), for: .normal)
+        button.setTitleColor(UIColor.red, for: .normal)
         button.titleLabel?.font = UIFont(name: "SnackFeed", size: 22)
         button.setTitle("h", for: .normal)
         return button
@@ -137,12 +137,12 @@ class ItemCell: UITableViewCell {
     let commentLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true // limits image to the confines of the view
-        label.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        label.backgroundColor = UIColor.lightGray
         label.layer.cornerRadius = 20
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 3
         label.font = UIFont(name: "SnackFeed", size: 22)
-        label.textColor = UIColor.green.withAlphaComponent(0.5)
+        label.textColor = UIColor.mutedGreen
         label.textAlignment = NSTextAlignment.center
         label.text = "b"
         
@@ -161,26 +161,34 @@ class ItemCell: UITableViewCell {
     let reactionLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true // limits image to the confines of the view
-        label.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        label.backgroundColor = UIColor.lightGray
         label.layer.cornerRadius = 20
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 3
         label.font = UIFont(name: "SnackFeed", size: 22)
-        label.textColor = UIColor.red.withAlphaComponent(0.5)
+        label.textColor = UIColor.mutedRed
         label.textAlignment = NSTextAlignment.center
         label.text = "h"
         return label // return the image to the cell
+    }()
+    
+    let gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.opacity = 0.5
+        layer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.black.cgColor]
+        layer.locations = [0.0, 0.3, 0.7, 1.0]
+        return layer
     }()
 
     let yumLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true
-        label.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        label.backgroundColor = UIColor.lightGray
         label.layer.cornerRadius = 20
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 3
-        label.font = UIFont(name: "SnackFeed", size: 22)
-        label.textColor = UIColor.blue.withAlphaComponent(0.5)
+        label.font = UIFont(name: "SnackFeed", size: 24)
+        label.textColor = UIColor.mutedBlue
         label.textAlignment = NSTextAlignment.center
         label.text = "q"
         return label
@@ -201,11 +209,19 @@ class ItemCell: UITableViewCell {
         contentView.addSubview(reactionLabel)
         contentView.addSubview(yumLabel)
         
+        snackImageView.layer.addSublayer(gradientLayer)
+        
         installConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        gradientLayer.frame = snackImageView.frame
     }
     
     func installConstraints() {

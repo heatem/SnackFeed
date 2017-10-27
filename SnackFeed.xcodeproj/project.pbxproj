@@ -17,6 +17,7 @@
 		AEC897641F82F7A60099E07B /* SnackFeedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897631F82F7A60099E07B /* SnackFeedUITests.swift */; };
 		AEC897721F84811F0099E07B /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897711F84811F0099E07B /* ItemCell.swift */; };
 		AEE2F2411F9C680700F9F88C /* SnackFeed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEE2F2401F9C680600F9F88C /* SnackFeed.ttf */; };
+		AEEF830D1FA2F113009F307D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF830C1FA2F113009F307D /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		AEC897651F82F7A60099E07B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEC897711F84811F0099E07B /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		AEE2F2401F9C680600F9F88C /* SnackFeed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnackFeed.ttf; sourceTree = "<group>"; };
+		AEEF830C1FA2F113009F307D /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				AEC897401F82F7A60099E07B /* AppDelegate.swift */,
 				AEC897421F82F7A60099E07B /* FeedViewController.swift */,
 				AEC897711F84811F0099E07B /* ItemCell.swift */,
+				AEEF830C1FA2F113009F307D /* UIColor.swift */,
 				AEC897441F82F7A60099E07B /* Main.storyboard */,
 				AEC8974A1F82F7A60099E07B /* Assets.xcassets */,
 				AEC8974C1F82F7A60099E07B /* LaunchScreen.storyboard */,
@@ -273,6 +276,7 @@
 				AEC897431F82F7A60099E07B /* FeedViewController.swift in Sources */,
 				AEC897411F82F7A60099E07B /* AppDelegate.swift in Sources */,
 				AEC897491F82F7A60099E07B /* SnackFeed.xcdatamodeld in Sources */,
+				AEEF830D1FA2F113009F307D /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
