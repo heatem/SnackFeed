@@ -3,7 +3,7 @@
 //  swaay
 //
 //  Created by Daniel Burke on 7/29/17.
-//  Copyright © 2017 Swaay. All rights reserved.
+//  Copyright © 2017 SnackFeed. All rights reserved.
 //
 
 import class UIKit.UIColor
