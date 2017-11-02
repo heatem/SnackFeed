@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D9A3118246CBD600D931508 /* Pods_SnackFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED11FBEDFFB1ED40BA041A1 /* Pods_SnackFeed.framework */; };
+		AE3B9A471FAAD17200C37543 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3B9A461FAAD17200C37543 /* keys.swift */; };
 		AEC897411F82F7A60099E07B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897401F82F7A60099E07B /* AppDelegate.swift */; };
 		AEC897431F82F7A60099E07B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897421F82F7A60099E07B /* FeedViewController.swift */; };
 		AEC897461F82F7A60099E07B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEC897441F82F7A60099E07B /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		661FCCB8F51193D686326C8E /* Pods-SnackFeed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackFeed.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnackFeed/Pods-SnackFeed.release.xcconfig"; sourceTree = "<group>"; };
 		662C1D00A253B7F35AC276D8 /* Pods-SnackFeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackFeed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnackFeed/Pods-SnackFeed.debug.xcconfig"; sourceTree = "<group>"; };
 		6ED11FBEDFFB1ED40BA041A1 /* Pods_SnackFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnackFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE3B9A461FAAD17200C37543 /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
 		AEC8973D1F82F7A60099E07B /* SnackFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnackFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC897401F82F7A60099E07B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEC897421F82F7A60099E07B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				AEC8974F1F82F7A60099E07B /* Info.plist */,
 				AEC897471F82F7A60099E07B /* SnackFeed.xcdatamodeld */,
 				AEE2F2401F9C680600F9F88C /* SnackFeed.ttf */,
+				AE3B9A461FAAD17200C37543 /* keys.swift */,
 			);
 			path = SnackFeed;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				AEC897721F84811F0099E07B /* ItemCell.swift in Sources */,
 				AEC897431F82F7A60099E07B /* FeedViewController.swift in Sources */,
 				AEC897411F82F7A60099E07B /* AppDelegate.swift in Sources */,
+				AE3B9A471FAAD17200C37543 /* keys.swift in Sources */,
 				AEC897491F82F7A60099E07B /* SnackFeed.xcdatamodeld in Sources */,
 				AEEF830D1FA2F113009F307D /* UIColor.swift in Sources */,
 			);

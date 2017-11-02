@@ -16,7 +16,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Alamofire.request("https://jsonplaceholder.typicode.com/posts").responseJSON { response in
+        Alamofire.request("https://13.57.36.150:80/parse/classes/Snacks/").responseJSON { response in
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response?.statusCode))") // http url response
             print("Result: \(response.result)")                         // response serialization result
