@@ -23,7 +23,7 @@ class FeedViewController: UIViewController {
             "Accept": "application/json"
         ]
 
-        Alamofire.request("http://13.57.36.150:80/parse/classes/Snacks/", headers: headers).responseJSON { [weak self] response in
+        Alamofire.request("http://13.57.36.150:80/parse/classes/Snacks/?include=user", headers: headers).responseJSON { [weak self] response in
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response?.statusCode))") // http url response
             print("Result: \(response.result)")                         // response serialization result
@@ -94,49 +94,33 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             if
                 let file = snackList[indexPath.row]["image"] as? [String: Any],
                 let imageUrl = file["url"] as? String,
+                let userObject = snackList[indexPath.row]["user"] as? [String:Any],
+                let userImage = userObject["userImage"] as? [String:Any],
+                let userImageUrl = userImage["url"] as? String,
+                let usernameDisplay = userObject["username"] as? String,
                 
                 let title = snackList[indexPath.row]["title"],
                 let createdAt = snackList[indexPath.row]["createdAt"],
-//                let userImageURL = snackSamples[indexPath.row]["user-image-url"] as? String,
-//                let userImage = UIImage(named: userImageURL),
-                let usernameDisplay = snackList[indexPath.row]["username"],
                 let thanksCount = snackList[indexPath.row]["thanks"],
                 let reactionCount = snackList[indexPath.row]["yums"]
             {
                 if let url = URL(string: imageUrl) {
-                    let session = URLSession(configuration: .default)
+                    itemCell.snackImageView.af_setImage(withURL: url)
+                }
                 
-                    let downloadPicTask = session.dataTask(with: url) { (data, response, error) in
-                        if let e = error {
-                            print("Error downloading cat picture: \(e)")
-                        } else {
-                            if let res = response as? HTTPURLResponse {
-                                print("Downloaded cat picture with response code \(res.statusCode)")
-                                if let imageData = data {
-                                    // Finally convert that Data into an image and do what you wish with it.
-                                    DispatchQueue.main.async{
-                                        itemCell.snackImageView.image = UIImage(data: imageData)
-                                    }
-                                    // Do something with your image.
-                                } else {
-                                    print("Couldn't get image: Image is nil")
-                                }
-                            } else {
-                                print("Couldn't get response code for some reason")
-                            }
-                        }
-                    }
-                    downloadPicTask.resume()
+                if let url = URL(string: userImageUrl) {
+                    itemCell.userImageView.af_setImage(withURL: url)
                 }
 
                 itemCell.snackItemLabel.text = String(describing: title)
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss.SSSZ"
+//                print(dateFormatter.date(from: String(describing: createdAt)))
                 if let createdTime: Date = dateFormatter.date(from: String(describing: createdAt)) {
+                    print(createdAt)
                     itemCell.timeLabel.text = timeAgo(date: createdTime)
+                    print("Time Created ago: \(timeAgo(date: createdTime))")
                 }
-//
-//                itemCell.userImageView.image = userImage
                 itemCell.usernameLabel.text = String(describing: usernameDisplay)
                 itemCell.commentCountLabel.text = String(describing: thanksCount)
                 itemCell.reactionCountLabel.text = String(describing: reactionCount)
