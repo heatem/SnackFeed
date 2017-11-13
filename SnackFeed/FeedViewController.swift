@@ -39,9 +39,7 @@ class FeedViewController: UIViewController {
             }
 
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)") // original server data as UTF8 string
-//                let snackSamples = try! JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
-//                print("SnackSamples: \(snackSamples)")
+                print("Data: \(utf8Text)")
 
             }
         

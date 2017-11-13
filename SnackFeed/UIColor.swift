@@ -1,6 +1,6 @@
 //
 //  UIColor.swift
-//  swaay
+//  SnackFeed
 //
 //  Created by Daniel Burke on 7/29/17.
 //  Copyright © 2017 SnackFeed. All rights reserved.
