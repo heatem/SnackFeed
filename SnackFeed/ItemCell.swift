@@ -9,62 +9,10 @@
 import UIKit
 import QuartzCore
 
-var snackSamples = [
-    [
-        "created-at": "2017-10-24 11:00:28",
-        "image-url": "apples.jpeg",
-        "title": "Apples",
-        "description": "Delicious green apples on the 4th floor.",
-        "thanks": 8,
-        "yums": 0,
-        "username": "heather",
-        "user-image-url": "meinart.jpg"
-    ],
-    [
-        "created-at": "2017-10-22 11:00:28",
-        "image-url": "coffee.jpeg",
-        "title": "Coffee",
-        "description": "Three Ships and Philz coffee.",
-        "thanks": 0,
-        "yums": 3,
-        "username": "heather",
-        "user-image-url": "meinart.jpg"
-    ],
-    [
-        "created-at": "2017-10-21 11:00:28",
-        "image-url": "eggs.jpeg",
-        "title": "Hardboiled Eggs in Shells in a Bowl",
-        "description": "Eggs added to boiling water and boiled for 10 minutes. Unpeeled. Great with a light sprinkle of cayenne pepper.",
-        "thanks": 0,
-        "yums": 0,
-        "username": "heather",
-        "user-image-url": "meinart.jpg"
-    ],
-    [
-        "created-at": "2017-09-2 11:00:28",
-        "image-url": "kimchi.jpg",
-        "title": "Kimchi (Vegetarian)",
-        "description": "Spicy kimchi, no fish.",
-        "thanks": 0,
-        "yums": 0,
-        "username": "anonymous",
-        "user-image-url": "eggs.jpeg"
-    ],
-    [
-        "created-at": "2016-10-19 11:00:45",
-        "image-url": "popcorn.jpeg",
-        "title": "Sweet Jalapeno Popcorn",
-        "description": "POP Mama POP Sweet Jalapeno Popcorn at Tech Inclusion 2017",
-        "thanks": 0,
-        "yums": 0,
-        "username": "heather",
-        "user-image-url": "meinart.jpg"
-    ]
-]
+var snackList: Array<NSDictionary> = []
 
 class ItemCell: UITableViewCell {
-    
-    
+
     // add elements like image, title, etc. to the cell. Don't forget to add to the init function and add any constraints
     // image
     let snackImageView: UIImageView = {
@@ -80,7 +28,7 @@ class ItemCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont(name: "Helvetica", size: 20)
-        label.text = "23 minutes ago"
+//        label.text = "23 minutes ago"
         return label
     }()
 
