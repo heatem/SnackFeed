@@ -47,7 +47,7 @@ class FeedViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         // Note that if you create a self-sizing cell in Interface Builder, the default row height is changed to the value set in Interface Builder. To get the expected self-sizing behavior for a cell that you create in Interface Builder, you must explicitly set rowHeight equal to UITableViewAutomaticDimension in your code.
-        tableView.register(ItemCell.self, forCellReuseIdentifier: "item")
+        tableView.register(SnackCell.self, forCellReuseIdentifier: "item")
         
         view.addSubview(tableView)
         
@@ -89,7 +89,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         // create a reusable cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
-        if let itemCell = cell as? ItemCell {
+        if let itemCell = cell as? SnackCell {
             if
                 let file = snackList[indexPath.row]["image"] as? [String: Any],
                 let imageUrl = file["url"] as? String,

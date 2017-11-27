@@ -1,5 +1,5 @@
 //
-//  ItemCell.swift
+//  SnackCell.swift
 //  SnackFeed
 //
 //  Created by Heather Mason on 10/3/17.
@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class ItemCell: UITableViewCell {
+class SnackCell: UITableViewCell {
 
     // add elements like image, title, etc. to the cell. Don't forget to add to the init function and add any constraints
     // image
