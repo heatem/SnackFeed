@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8D9A3118246CBD600D931508 /* Pods_SnackFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED11FBEDFFB1ED40BA041A1 /* Pods_SnackFeed.framework */; };
+		AE20BD331FC91E7800BAE0F4 /* SnackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE20BD321FC91E7800BAE0F4 /* SnackViewController.swift */; };
+		AE20BD351FCA93C500BAE0F4 /* FeedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE20BD341FCA93C500BAE0F4 /* FeedNavigationController.swift */; };
+		AE20BD391FCB7EA700BAE0F4 /* Date+TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE20BD381FCB7EA700BAE0F4 /* Date+TimeAgo.swift */; };
 		AE3B9A471FAAD17200C37543 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3B9A461FAAD17200C37543 /* Keys.swift */; };
 		AEC897411F82F7A60099E07B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897401F82F7A60099E07B /* AppDelegate.swift */; };
 		AEC897431F82F7A60099E07B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897421F82F7A60099E07B /* FeedViewController.swift */; };
@@ -43,6 +46,9 @@
 		661FCCB8F51193D686326C8E /* Pods-SnackFeed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackFeed.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnackFeed/Pods-SnackFeed.release.xcconfig"; sourceTree = "<group>"; };
 		662C1D00A253B7F35AC276D8 /* Pods-SnackFeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackFeed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnackFeed/Pods-SnackFeed.debug.xcconfig"; sourceTree = "<group>"; };
 		6ED11FBEDFFB1ED40BA041A1 /* Pods_SnackFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnackFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE20BD321FC91E7800BAE0F4 /* SnackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackViewController.swift; sourceTree = "<group>"; };
+		AE20BD341FCA93C500BAE0F4 /* FeedNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNavigationController.swift; sourceTree = "<group>"; };
+		AE20BD381FCB7EA700BAE0F4 /* Date+TimeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TimeAgo.swift"; sourceTree = "<group>"; };
 		AE3B9A461FAAD17200C37543 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		AEC8973D1F82F7A60099E07B /* SnackFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnackFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC897401F82F7A60099E07B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +139,9 @@
 			children = (
 				AEC897401F82F7A60099E07B /* AppDelegate.swift */,
 				AEC897421F82F7A60099E07B /* FeedViewController.swift */,
+				AE20BD321FC91E7800BAE0F4 /* SnackViewController.swift */,
+				AE20BD341FCA93C500BAE0F4 /* FeedNavigationController.swift */,
+				AE20BD381FCB7EA700BAE0F4 /* Date+TimeAgo.swift */,
 				AEC897711F84811F0099E07B /* ItemCell.swift */,
 				AEEF830C1FA2F113009F307D /* UIColor.swift */,
 				AEC897441F82F7A60099E07B /* Main.storyboard */,
@@ -359,10 +368,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEC897721F84811F0099E07B /* ItemCell.swift in Sources */,
+				AE20BD351FCA93C500BAE0F4 /* FeedNavigationController.swift in Sources */,
 				AEC897431F82F7A60099E07B /* FeedViewController.swift in Sources */,
 				AEC897411F82F7A60099E07B /* AppDelegate.swift in Sources */,
 				AE3B9A471FAAD17200C37543 /* Keys.swift in Sources */,
 				AEC897491F82F7A60099E07B /* SnackFeed.xcdatamodeld in Sources */,
+				AE20BD391FCB7EA700BAE0F4 /* Date+TimeAgo.swift in Sources */,
+				AE20BD331FC91E7800BAE0F4 /* SnackViewController.swift in Sources */,
 				AEEF830D1FA2F113009F307D /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

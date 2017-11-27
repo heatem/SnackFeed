@@ -1,24 +1,25 @@
 //
-//  ItemCell.swift
+//  SnackViewController.swift
 //  SnackFeed
 //
-//  Created by Heather Mason on 10/3/17.
+//  Created by Heather Mason on 11/24/17.
 //  Copyright © 2017 HeatherMasonDev. All rights reserved.
 //
 
 import UIKit
-import QuartzCore
+import Alamofire
+import AlamofireImage
 
-class ItemCell: UITableViewCell {
-
-    // add elements like image, title, etc. to the cell. Don't forget to add to the init function and add any constraints
-    // image
+class SnackViewController: UIViewController {
+    
+    var snack = [String: Any]()
+    
     let snackImageView: UIImageView = {
         let snackImage = UIImageView()
-        snackImage.clipsToBounds = true // limits image to the confines of the view
+        snackImage.clipsToBounds = true
         snackImage.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
         snackImage.contentMode = .scaleAspectFill
-        return snackImage // return the image to the cell
+        return snackImage
     }()
     
     // time label
@@ -28,7 +29,7 @@ class ItemCell: UITableViewCell {
         label.font = UIFont(name: "Helvetica", size: 20)
         return label
     }()
-
+    
     // heart button
     let reactionButton: UIButton = {
         let button = UIButton()
@@ -40,7 +41,7 @@ class ItemCell: UITableViewCell {
         button.setTitle("h", for: .normal)
         return button
     }()
-
+    
     // title
     let snackItemLabel: UILabel = {
         let label = UILabel()
@@ -51,8 +52,8 @@ class ItemCell: UITableViewCell {
         label.text = "A Delicious Snack"
         return label
     }()
-
-//  user image
+    
+    //  user image
     let userImageView: UIImageView = {
         let userImage = UIImageView()
         userImage.clipsToBounds = true
@@ -60,20 +61,20 @@ class ItemCell: UITableViewCell {
         userImage.layer.cornerRadius = 20
         return userImage
     }()
-
+    
     // username
-     let usernameLabel: UILabel = {
+    let usernameLabel: UILabel = {
         let label = UILabel()
         label.text = "username"
         return label
-     }()
-
-//     comment count
+    }()
+    
+    //     comment count
     let commentCountLabel: UILabel = {
         let label = UILabel()
         return label
     }()
-
+    
     // comment icon
     let commentLabel: UILabel = {
         let label = UILabel()
@@ -89,13 +90,14 @@ class ItemCell: UITableViewCell {
         
         return label // return the image to the cell
     }()
-
+    
     // thanks count
-     let thanksCountLabel: UILabel = {
+    let thanksCountLabel: UILabel = {
         let label = UILabel()
+        label.text = "16"
         return label
-     }()
-
+    }()
+    
     // reaction icons
     let thanksLabel: UILabel = {
         let label = UILabel()
@@ -118,7 +120,7 @@ class ItemCell: UITableViewCell {
         layer.locations = [0.0, 0.3, 0.7, 1.0]
         return layer
     }()
-
+    
     let yumLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true
@@ -135,96 +137,66 @@ class ItemCell: UITableViewCell {
     
     let yumCountLabel: UILabel = {
         let label = UILabel()
+        label.text = "16"
         return label
     }()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        selectionStyle = .none
-        contentView.addSubview(snackImageView)
-        contentView.addSubview(timeLabel)
-        contentView.addSubview(reactionButton)
-        contentView.addSubview(snackItemLabel)
-        contentView.addSubview(userImageView)
-        contentView.addSubview(usernameLabel)
-        contentView.addSubview(commentLabel)
-        contentView.addSubview(commentCountLabel)
-        contentView.addSubview(thanksCountLabel)
-        contentView.addSubview(thanksLabel)
-        contentView.addSubview(yumLabel)
-        contentView.addSubview(yumCountLabel)
-        
-        snackImageView.layer.addSublayer(gradientLayer)
-        
-        installConstraints()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        gradientLayer.frame = snackImageView.frame
-    }
-    
     func installConstraints() {
+        
         snackImageView.translatesAutoresizingMaskIntoConstraints = false
-        snackImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        snackImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        snackImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        snackImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1, constant: 0).isActive = true
+        snackImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        snackImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        snackImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        snackImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1, constant: 0).isActive = true
         snackImageView.contentMode = .scaleAspectFill
         
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        timeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        timeLabel.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 10).isActive = true
         timeLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        timeLabel.widthAnchor.constraint(equalToConstant: frame.size.width - 60).isActive = true
-
+        timeLabel.widthAnchor.constraint(equalToConstant: view.frame.width - 60).isActive = true
+        
         reactionButton.translatesAutoresizingMaskIntoConstraints = false
-        reactionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        reactionButton.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        reactionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        reactionButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 10).isActive = true
         reactionButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         reactionButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-
+        
         snackItemLabel.translatesAutoresizingMaskIntoConstraints = false
-        snackItemLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        snackItemLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        snackItemLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        snackItemLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         snackItemLabel.bottomAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: -10).isActive = true
-
+        
         userImageView.translatesAutoresizingMaskIntoConstraints = false
-        userImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        userImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         userImageView.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 10).isActive = true
         userImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         userImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
         userImageView.contentMode = .scaleAspectFill
-
+        
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         usernameLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 8).isActive = true
         usernameLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 20).isActive = true
         usernameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        usernameLabel.widthAnchor.constraint(equalToConstant: frame.size.width / 2).isActive = true
-
+        usernameLabel.widthAnchor.constraint(equalToConstant: view.frame.width / 2).isActive = true
+        
         commentCountLabel.translatesAutoresizingMaskIntoConstraints = false
         commentCountLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 20).isActive = true
         commentCountLabel.trailingAnchor.constraint(equalTo: commentLabel.leadingAnchor, constant: -8).isActive = true
         commentCountLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-
+        
         commentLabel.translatesAutoresizingMaskIntoConstraints = false
         commentLabel.trailingAnchor.constraint(equalTo: thanksCountLabel.leadingAnchor, constant: -8).isActive = true
         commentLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 10).isActive = true
         commentLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         commentLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
         commentLabel.contentMode = .scaleAspectFill
-
+        
         thanksCountLabel.translatesAutoresizingMaskIntoConstraints = false
         thanksCountLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 20).isActive = true
         thanksCountLabel.trailingAnchor.constraint(equalTo: thanksLabel.leadingAnchor, constant: -8).isActive = true
         thanksCountLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-
+        
         thanksLabel.translatesAutoresizingMaskIntoConstraints = false
         thanksLabel.trailingAnchor.constraint(equalTo: yumLabel.leadingAnchor, constant: 6).isActive = true
         thanksLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 8).isActive = true
@@ -232,7 +204,7 @@ class ItemCell: UITableViewCell {
         thanksLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
         thanksLabel.layer.zPosition = 1
         thanksLabel.contentMode = .scaleAspectFill
-
+        
         yumLabel.translatesAutoresizingMaskIntoConstraints = false
         yumLabel.trailingAnchor.constraint(equalTo: yumCountLabel.leadingAnchor, constant: -8).isActive = true
         yumLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 8).isActive = true
@@ -241,9 +213,72 @@ class ItemCell: UITableViewCell {
         yumLabel.contentMode = .scaleAspectFill
         
         yumCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        yumCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        yumCountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         yumCountLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 20).isActive = true
         yumCountLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = snack["title"] as? String
+        print(snack)
+        if
+            let file = snack["image"] as? [String: Any],
+            let imageUrl = file["url"] as? String,
+            let userObject = snack["user"] as? [String:Any],
+            let userImage = userObject["userImage"] as? [String:Any],
+            let userImageUrl = userImage["url"] as? String,
+            let usernameDisplay = userObject["username"] as? String,
+            
+            let title = snack["title"],
+            let createdAt = snack["createdAt"],
+            let thanksCount = snack["thanks"],
+            let yumsCount = snack["yums"]
+        {
+            if let url = URL(string: imageUrl) {
+                snackImageView.af_setImage(withURL: url)
+            }
+            
+            if let url = URL(string: userImageUrl) {
+                userImageView.af_setImage(withURL: url)
+            }
+            
+            snackItemLabel.text = String(describing: title)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            //                print(dateFormatter.date(from: String(describing: createdAt)))
+            if let createdTime: Date = dateFormatter.date(from: String(describing: createdAt)) {
+//                print(createdAt)
+                timeLabel.text = createdTime.timeAgo()
+            }
+            usernameLabel.text = String(describing: usernameDisplay)
+            thanksCountLabel.text = String(describing: thanksCount)
+            yumCountLabel.text = String(describing: yumsCount)
+        }
+        
+        view.backgroundColor = .white
+        
+        view.addSubview(snackImageView)
+        view.addSubview(timeLabel)
+        view.addSubview(reactionButton)
+        view.addSubview(snackItemLabel)
+        view.addSubview(userImageView)
+        view.addSubview(usernameLabel)
+        view.addSubview(commentLabel)
+        view.addSubview(commentCountLabel)
+        view.addSubview(thanksCountLabel)
+        view.addSubview(thanksLabel)
+        view.addSubview(yumLabel)
+        view.addSubview(yumCountLabel)
+        
+        snackImageView.layer.addSublayer(gradientLayer)
+        installConstraints()
+        
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }
