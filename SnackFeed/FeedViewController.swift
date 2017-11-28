@@ -89,7 +89,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         // create a reusable cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
-        if let itemCell = cell as? SnackCell {
+        if let snackCell = cell as? SnackCell {
             if
                 let file = snackList[indexPath.row]["image"] as? [String: Any],
                 let imageUrl = file["url"] as? String,
@@ -104,24 +104,24 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 let yumsCount = snackList[indexPath.row]["yums"]
             {
                 if let url = URL(string: imageUrl) {
-                    itemCell.snackImageView.af_setImage(withURL: url)
+                    snackCell.snackImageView.af_setImage(withURL: url)
                 }
                 
                 if let url = URL(string: userImageUrl) {
-                    itemCell.userImageView.af_setImage(withURL: url)
+                    snackCell.userImageView.af_setImage(withURL: url)
                 }
 
-                itemCell.snackItemLabel.text = String(describing: title)
+                snackCell.snackItemLabel.text = String(describing: title)
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 //                print(dateFormatter.date(from: String(describing: createdAt)))
                 if let createdTime: Date = dateFormatter.date(from: String(describing: createdAt)) {
 //                    print(createdAt)
-                    itemCell.timeLabel.text = createdTime.timeAgo()
+                    snackCell.timeLabel.text = createdTime.timeAgo()
                 }
-                itemCell.usernameLabel.text = String(describing: usernameDisplay)
-                itemCell.thanksCountLabel.text = String(describing: thanksCount)
-                itemCell.yumCountLabel.text = String(describing: yumsCount)
+                snackCell.usernameLabel.text = String(describing: usernameDisplay)
+                snackCell.thanksCountLabel.text = String(describing: thanksCount)
+                snackCell.yumCountLabel.text = String(describing: yumsCount)
             }
         }
         return cell
