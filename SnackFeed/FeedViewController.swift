@@ -34,13 +34,14 @@ class FeedViewController: UIViewController {
                         self?.snackList.append(snackDict)
                     }
                 }
+//                print(self?.snackList)
                 self?.tableView.reloadData()
             }
 
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                print("Data: \(utf8Text)")
-
-            }
+//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+////                print("Data: \(utf8Text)")
+//
+//            }
             
         }
         

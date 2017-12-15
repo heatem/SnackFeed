@@ -6,6 +6,8 @@
 //  Copyright © 2017 HeatherMasonDev. All rights reserved.
 //
 
+// Need to refactor how comments are filtered. Right now, I loop through all comments and compare the snack object id to filter them. Need to request only the required comments.
+
 import UIKit
 import Alamofire
 import AlamofireImage
@@ -14,13 +16,13 @@ class SnackViewController: UIViewController {
     
     var snack = [String: Any]()
     let tableView = UITableView(frame: .zero, style: .grouped)
+    var commentList = [[String: Any]]()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = snack["title"] as? String
-        print(snack)
         view.addSubview(tableView)
 
         view.backgroundColor = .white
@@ -37,7 +39,6 @@ class SnackViewController: UIViewController {
         tableView.tableHeaderView = SnackView()
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width + 100)
         if let header = tableView.tableHeaderView as? SnackView {
-            print(snack)
             if
             let file = snack["image"] as? [String: Any],
                 let imageUrl = file["url"] as? String,
@@ -63,8 +64,6 @@ class SnackViewController: UIViewController {
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 if let createdTime: Date = dateFormatter.date(from: String(describing: createdAt)) {
                     header.timeLabel.text = createdTime.timeAgo()
-                    print(createdTime)
-                    print("hi")
                 }
                 
                 header.usernameLabel.text = String(describing: usernameDisplay)
@@ -73,11 +72,50 @@ class SnackViewController: UIViewController {
             }
         }
         
+        
+        // IN PROGRESS
+        let headers: HTTPHeaders = [
+            "X-Parse-REST-API-Key": PARSE_CLIENT_KEY,
+            "X-Parse-Application-Id": PARSE_APP_ID,
+            "Accept": "application/json",
+            ]
+        
+        
+        Alamofire.request("http://13.57.36.150:80/parse/classes/Comments", headers: headers).responseJSON { [weak self] response in
+            if let json = response.result.value, let dict = json as? [String: Any], let comments = dict["results"] as? [Any] {
+                print(comments)
+                for comment in comments {
+//                    print("comment: \(comment)")
+                    if let commentDict = comment as? [String: Any] {
+                        print("commentDict: \(commentDict)")
+                        if
+                            let snackObj = commentDict["snack"] as? [String: Any],
+                            let objIdForSnack = snackObj["objectId"] as? String,
+                            let snackId = self?.snack["objectId"] as? String
+                        {
+                            if snackId == objIdForSnack {
+                                self?.commentList.append(commentDict)
+                            }
+                        }
+                    }
+                }
+                print("Comment List: \(String(describing: self?.commentList))")
+                self?.tableView.reloadData()
+            }
+            
+//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+////                                print("Data: \(utf8Text)")
+//
+//            }
+            
+        }
+        
         // Do any additional setup after loading the view.
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
     }
 
     override func didReceiveMemoryWarning() {

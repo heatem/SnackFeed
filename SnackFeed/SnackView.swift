@@ -192,7 +192,7 @@ class SnackView: UIView {
 
         snackItemLabel.translatesAutoresizingMaskIntoConstraints = false
         snackItemLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        snackItemLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+//        snackItemLabel.widthAnchor.constraint(equalTo: snackImageView.widthAnchor, constant: -10).isActive = true
         snackItemLabel.bottomAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: -10).isActive = true
 
         userImageView.translatesAutoresizingMaskIntoConstraints = false
