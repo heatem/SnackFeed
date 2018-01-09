@@ -94,8 +94,8 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             if
                 let file = snackList[indexPath.row]["image"] as? [String: Any],
                 let imageUrl = file["url"] as? String,
-                let userObject = snackList[indexPath.row]["user"] as? [String:Any],
-                let userImage = userObject["userImage"] as? [String:Any],
+                let userObject = snackList[indexPath.row]["user"] as? [String: Any],
+                let userImage = userObject["userImage"] as? [String: Any],
                 let userImageUrl = userImage["url"] as? String,
                 let usernameDisplay = userObject["username"] as? String,
                 

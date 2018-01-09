@@ -6,7 +6,7 @@
 //  Copyright © 2017 HeatherMasonDev. All rights reserved.
 //
 
-// Need to refactor how comments are filtered. Right now, I loop through all comments and compare the snack object id to filter them. Need to request only the required comments.
+// Need to refactor how comments are filtered. Right now, I loop through all comments and compare the snack object id to filter them. Need to request only the required comments. Resume here: Check if you've done this
 
 import UIKit
 import Alamofire
@@ -23,18 +23,8 @@ class SnackViewController: UIViewController {
         super.viewDidLoad()
         
         title = snack["title"] as? String
-        view.addSubview(tableView)
 
         view.backgroundColor = .white
-        
-        // need to add constraints to be able to see the table
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        // set constraints
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        
         
         tableView.tableHeaderView = SnackView()
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width + 100)
@@ -80,14 +70,10 @@ class SnackViewController: UIViewController {
             "Accept": "application/json",
             ]
         
-        
-        Alamofire.request("http://13.57.36.150:80/parse/classes/Comments", headers: headers).responseJSON { [weak self] response in
+        Alamofire.request("http://13.57.36.150:80/parse/classes/Comments/?include=author", headers: headers).responseJSON { [weak self] response in
             if let json = response.result.value, let dict = json as? [String: Any], let comments = dict["results"] as? [Any] {
-                print(comments)
                 for comment in comments {
-//                    print("comment: \(comment)")
                     if let commentDict = comment as? [String: Any] {
-                        print("commentDict: \(commentDict)")
                         if
                             let snackObj = commentDict["snack"] as? [String: Any],
                             let objIdForSnack = snackObj["objectId"] as? String,
@@ -99,7 +85,6 @@ class SnackViewController: UIViewController {
                         }
                     }
                 }
-                print("Comment List: \(String(describing: self?.commentList))")
                 self?.tableView.reloadData()
             }
             
@@ -114,8 +99,17 @@ class SnackViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(CommentCell.self, forCellReuseIdentifier: "item")
         
+        view.addSubview(tableView)
+        
+        // need to add constraints to be able to see the table
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        // set constraints
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -130,20 +124,50 @@ extension SnackViewController: UITableViewDelegate, UITableViewDataSource {
     // these two functions are required for UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return commentList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // create a reusable cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = "Hello"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
+        if let commentCell = cell as? CommentCell {
+            if
+                let userObject = commentList[indexPath.row]["author"] as? [String: Any],
+                let userImage = userObject["userImage"] as? [String: Any],
+                let userImageUrl = userImage["url"] as? String,
+                let usernameDisplay = userObject["username"] as? String,
+                let createdAt = commentList[indexPath.row]["createdAt"],
+                let commentItem = commentList[indexPath.row]["comment"]
+            {
+                
+                //  set user image
+                if let url = URL(string: userImageUrl) {
+                    commentCell.userImageView.af_setImage(withURL: url)
+                }
+
+                // set username
+                commentCell.usernameLabel.text = String(describing: usernameDisplay)
+
+                // set time
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                if let createdTime: Date = dateFormatter.date(from: String(describing: createdAt)) {
+                    commentCell.timeLabel.text = createdTime.timeAgo()
+                }
+
+                // set comment
+                commentCell.commentLabel.text = String(describing: commentItem)
+            }
+        }
         
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 200
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+        // look up automatic height dimension
+//    will have to set constraints for all sides (top, bottom, leading trailing
+    }
     
 }
