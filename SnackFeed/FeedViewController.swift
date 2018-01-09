@@ -98,11 +98,11 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 let userImage = userObject["userImage"] as? [String: Any],
                 let userImageUrl = userImage["url"] as? String,
                 let usernameDisplay = userObject["username"] as? String,
-                
                 let title = snackList[indexPath.row]["title"],
                 let createdAt = snackList[indexPath.row]["createdAt"],
                 let thanksCount = snackList[indexPath.row]["thanks"],
                 let yumsCount = snackList[indexPath.row]["yums"]
+//                let description = snackList[indexPath.row]["description"]
             {
                 if let url = URL(string: imageUrl) {
                     snackCell.snackImageView.af_setImage(withURL: url)
@@ -123,6 +123,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 snackCell.usernameLabel.text = String(describing: usernameDisplay)
                 snackCell.thanksCountLabel.text = String(describing: thanksCount)
                 snackCell.yumCountLabel.text = String(describing: yumsCount)
+//                snackCell.snackDescriptionLabel.text = String(describing: description)
             }
         }
         return cell

@@ -138,6 +138,16 @@ class SnackCell: UITableViewCell {
         return label
     }()
     
+//    let snackDescriptionLabel: UILabel = {
+//        let label = UILabel()
+//        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+//        label.font = UIFont(name: "Helvetica", size: 20)
+//        label.textColor = .black
+//        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+//        label.numberOfLines = 2
+//        return label
+//    }()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -154,6 +164,7 @@ class SnackCell: UITableViewCell {
         contentView.addSubview(thanksLabel)
         contentView.addSubview(yumLabel)
         contentView.addSubview(yumCountLabel)
+//        contentView.addSubview(snackDescriptionLabel)
         
         snackImageView.layer.addSublayer(gradientLayer)
         
@@ -244,6 +255,11 @@ class SnackCell: UITableViewCell {
         yumCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         yumCountLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 20).isActive = true
         yumCountLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+//        snackDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+//        snackDescriptionLabel.topAnchor.constraint(equalTo: userImageView.bottomAnchor, constant: 10).isActive = true
+//        snackDescriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+//        snackDescriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10).isActive = true
     }
     
 }
