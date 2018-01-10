@@ -93,6 +93,7 @@ class SnackCell: UITableViewCell {
     // thanks count
      let thanksCountLabel: UILabel = {
         let label = UILabel()
+        label.text = "oo"
         return label
      }()
 

@@ -70,6 +70,7 @@ class SnackView: UIView {
     //     comment count
     let commentCountLabel: UILabel = {
         let label = UILabel()
+        label.text = "oo"
         return label
     }()
 
@@ -206,7 +207,7 @@ class SnackView: UIView {
         usernameLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 8).isActive = true
         usernameLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 20).isActive = true
         usernameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        usernameLabel.widthAnchor.constraint(equalToConstant: frame.width / 2).isActive = true
+        usernameLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5, constant: 0).isActive = true
 
         commentCountLabel.translatesAutoresizingMaskIntoConstraints = false
         commentCountLabel.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 20).isActive = true

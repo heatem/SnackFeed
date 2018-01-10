@@ -17,7 +17,7 @@ class SnackViewController: UIViewController {
     var snack = [String: Any]()
     let tableView = UITableView(frame: .zero, style: .grouped)
     var commentList = [[String: Any]]()
-
+//    var commentCount: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,39 +28,6 @@ class SnackViewController: UIViewController {
         
         tableView.tableHeaderView = SnackView()
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width + 100)
-        if let header = tableView.tableHeaderView as? SnackView {
-            if
-            let file = snack["image"] as? [String: Any],
-                let imageUrl = file["url"] as? String,
-                let userObject = snack["user"] as? [String: Any],
-                let userImage = userObject["userImage"] as? [String: Any],
-                let userImageUrl = userImage["url"] as? String,
-                let usernameDisplay = userObject["username"] as? String,
-                let title = snack["title"] as? String,
-                let createdAt = snack["createdAt"] as? String,
-                let thanksCount = snack["thanks"],
-                let yumsCount = snack["yums"]
-            {
-                if let url = URL(string: imageUrl) {
-                    header.snackImageView.af_setImage(withURL: url)
-                }
-                
-                if let url = URL(string: userImageUrl) {
-                    header.userImageView.af_setImage(withURL: url)
-                }
-                header.snackItemLabel.text = title
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                if let createdTime: Date = dateFormatter.date(from: String(describing: createdAt)) {
-                    header.timeLabel.text = createdTime.timeAgo()
-                }
-                
-                header.usernameLabel.text = String(describing: usernameDisplay)
-                header.thanksCountLabel.text = String(describing: thanksCount)
-                header.yumCountLabel.text = String(describing: yumsCount)
-            }
-        }
         
         
         // IN PROGRESS
@@ -85,6 +52,7 @@ class SnackViewController: UIViewController {
                         }
                     }
                 }
+                self?.loadHeader()
                 self?.tableView.reloadData()
             }
             
@@ -168,6 +136,43 @@ extension SnackViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewAutomaticDimension
         // look up automatic height dimension
 //    will have to set constraints for all sides (top, bottom, leading trailing
+    }
+    
+    func loadHeader() {
+        if let header = tableView.tableHeaderView as? SnackView {
+            if
+                let file = snack["image"] as? [String: Any],
+                let imageUrl = file["url"] as? String,
+                let userObject = snack["user"] as? [String: Any],
+                let userImage = userObject["userImage"] as? [String: Any],
+                let userImageUrl = userImage["url"] as? String,
+                let usernameDisplay = userObject["username"] as? String,
+                let title = snack["title"] as? String,
+                let createdAt = snack["createdAt"] as? String,
+                let thanksCount = snack["thanks"],
+                let yumsCount = snack["yums"]
+            {
+                if let url = URL(string: imageUrl) {
+                    header.snackImageView.af_setImage(withURL: url)
+                }
+                
+                if let url = URL(string: userImageUrl) {
+                    header.userImageView.af_setImage(withURL: url)
+                }
+                header.snackItemLabel.text = title
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                if let createdTime: Date = dateFormatter.date(from: String(describing: createdAt)) {
+                    header.timeLabel.text = createdTime.timeAgo()
+                }
+                header.usernameLabel.text = String(describing: usernameDisplay)
+                header.thanksCountLabel.text = String(describing: thanksCount)
+                header.yumCountLabel.text = String(describing: yumsCount)
+                
+                header.commentCountLabel.text = String(describing: commentList.count)
+            }
+        }
     }
     
 }
