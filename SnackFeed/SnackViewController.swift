@@ -29,6 +29,12 @@ class SnackViewController: UIViewController {
         tableView.tableHeaderView = SnackView()
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width + 100)
         
+        let addCommentView = AddCommentView()
+        addCommentView.frame = CGRect(x: 0, y: view.frame.size.height - 60, width: view.frame.size.width, height: 60)
+        addCommentView.backgroundColor = UIColor.lightGray
+        
+        self.view.addSubview(addCommentView)
+        
         
         // IN PROGRESS
         let headers: HTTPHeaders = [
@@ -75,7 +81,7 @@ class SnackViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         // set constraints
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: addCommentView.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
