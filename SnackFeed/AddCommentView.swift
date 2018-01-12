@@ -9,10 +9,9 @@
 import UIKit
 
 class AddCommentView: UIView {
-    
     // textfield
     let commentTextField: UITextField = {
-        let textfield = UITextField(frame: CGRect(x: 10, y: 10, width: 300, height: 40))
+        let textfield = UITextField()
         textfield.clipsToBounds = true
         textfield.backgroundColor = .white
         textfield.layer.cornerRadius = 10
@@ -25,14 +24,23 @@ class AddCommentView: UIView {
     // post button
     let postCommentButton: UIButton = {
         let button = UIButton()
+        button.clipsToBounds = true
+        button.backgroundColor = .blue
+        button.layer.cornerRadius = 10
+        button.setTitleColor(UIColor.yellow, for: .normal)
+        button.setTitle("Post", for: .normal)
         
         return button
     }()
+    
     
     init() {
         super.init(frame: .zero)
         
         addSubview(commentTextField)
+        addSubview(postCommentButton)
+        
+        installConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,12 +51,16 @@ class AddCommentView: UIView {
         
         commentTextField.translatesAutoresizingMaskIntoConstraints = false
         commentTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        commentTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        commentTextField.trailingAnchor.constraint(equalTo: postCommentButton.leadingAnchor, constant: -10).isActive = true
         commentTextField.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         commentTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
-        commentTextField.contentMode = .scaleAspectFill
         
-        
+        postCommentButton.translatesAutoresizingMaskIntoConstraints = false
+        postCommentButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        postCommentButton.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        postCommentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        postCommentButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        postCommentButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
 
 }
