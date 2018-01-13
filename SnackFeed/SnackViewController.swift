@@ -22,6 +22,8 @@ class SnackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTapped()
+        
         title = snack["title"] as? String
 
         view.backgroundColor = .white
@@ -34,7 +36,6 @@ class SnackViewController: UIViewController {
         addCommentView.backgroundColor = UIColor.lightGray
         
         self.view.addSubview(addCommentView)
-        
         
         // IN PROGRESS
         let headers: HTTPHeaders = [
@@ -180,5 +181,17 @@ extension SnackViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    
 }
+
+extension UIViewController {
+    func hideKeyboardWhenTapped() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
