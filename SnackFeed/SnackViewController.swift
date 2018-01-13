@@ -12,7 +12,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class SnackViewController: UIViewController {
+class SnackViewController: UIViewController, UITextFieldDelegate {
     
     var snack = [String: Any]()
     let tableView = UITableView(frame: .zero, style: .grouped)
@@ -36,6 +36,9 @@ class SnackViewController: UIViewController {
         addCommentView.backgroundColor = UIColor.lightGray
         
         self.view.addSubview(addCommentView)
+        
+        let textField = addCommentView.commentTextField
+        textField.delegate = self
         
         // IN PROGRESS
         let headers: HTTPHeaders = [
@@ -90,6 +93,12 @@ class SnackViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
     }
 }
 
@@ -193,5 +202,6 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
 }
 

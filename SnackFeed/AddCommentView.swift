@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddCommentView: UIView {
+class AddCommentView: UIView, UITextFieldDelegate {
     // textfield
     let commentTextField: UITextField = {
         let textfield = UITextField()
@@ -17,7 +17,6 @@ class AddCommentView: UIView {
         textfield.layer.cornerRadius = 10
         textfield.placeholder = " Say thanks!"
         textfield.textColor = .darkGray
-        
         return textfield
     }()
     
