@@ -36,9 +36,7 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
         addCommentView.backgroundColor = UIColor.lightGray
         
         self.view.addSubview(addCommentView)
-        
-        let textField = addCommentView.commentTextField
-        textField.delegate = self
+        addCommentView.commentTextField.delegate = self
         
         // IN PROGRESS
         let headers: HTTPHeaders = [
