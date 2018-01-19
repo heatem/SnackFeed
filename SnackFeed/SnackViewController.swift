@@ -8,6 +8,8 @@
 
 // Need to refactor how comments are filtered. Right now, I loop through all comments and compare the snack object id to filter them. Need to request only the required comments. Resume here: Check if you've done this
 
+// TODO: can post dummy comment by clicking the button now. Need to figure out how to get the text from the textfield to register, not be optional, and add it into the comment (think i got the last part but need the first 2)
+
 import UIKit
 import Alamofire
 import AlamofireImage
@@ -17,6 +19,7 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
     var snack = [String: Any]()
     let tableView = UITableView(frame: .zero, style: .grouped)
     var commentList = [[String: Any]]()
+    let addCommentView = AddCommentView()
 //    var commentCount: Int = 0
     
     override func viewDidLoad() {
@@ -37,9 +40,9 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
         
         self.view.addSubview(addCommentView)
         
-        let textField = addCommentView.commentTextField
-        textField.delegate = self
-        
+        addCommentView.commentTextField.delegate = self
+        addCommentView.postCommentButton.addTarget(self, action: #selector(postComment), for: .touchUpInside)
+       
         // IN PROGRESS
         let headers: HTTPHeaders = [
             "X-Parse-REST-API-Key": PARSE_CLIENT_KEY,
@@ -97,8 +100,47 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
+        postComment()
         return true
+    }
+    
+    @objc func postComment() {
+        var dict: [String: Any] = [
+//            "updatedAt": "2018-01-13T21:18:13.964Z",
+//            "objectId": "MQwpyZz2MG",
+            "comment": String(describing: addCommentView.commentTextField.text),
+            "author": [
+//                "ACL": [
+//                    "*": [
+//                        "read": 1
+//                    ],
+//                "AklIHGtwPl": [
+//                    "read": 1,
+//                    "write": 1
+//                ]
+//            ],
+//                "__type": "Object",
+//                "className": "_User",
+//                "createdAt": "2017-11-13T05:05:56.130Z",
+                "objectId": "AklIHGtwPl",
+//                "updatedAt": "2017-11-13T05:06:59.516Z",
+                "userImage": [
+                    "__type": "File",
+                    "name": "e22bad268597fe48d1136f827423e353_meinart.jpg",
+                    "url": "http://13.57.36.150:80/parse/files/6011eeafaa1dfa09153cb22d970aa077791aeb1f/e22bad268597fe48d1136f827423e353_meinart.jpg"
+                    ],
+                "username": "testcommenter"
+            ],
+            "snack": [
+                "__type": "Pointer",
+                "className": "Snacks",
+                "objectId": "5jsFAPTaLF"
+            ],
+            "createdAt": "2018-01-16T05:40:17.114Z"
+        ]
+        self.commentList.append(dict)
+        viewDidLoad()
+        print(commentList)
     }
 }
 
