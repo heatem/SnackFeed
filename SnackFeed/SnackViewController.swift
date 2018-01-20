@@ -20,7 +20,7 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
     let tableView = UITableView(frame: .zero, style: .grouped)
     var commentList = [[String: Any]]()
     let addCommentView = AddCommentView()
-//    var commentCount: Int = 0
+    var newComment = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,16 +34,44 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
         tableView.tableHeaderView = SnackView()
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width + 100)
         
-        let addCommentView = AddCommentView()
         addCommentView.frame = CGRect(x: 0, y: view.frame.size.height - 60, width: view.frame.size.width, height: 60)
         addCommentView.backgroundColor = UIColor.lightGray
         
         self.view.addSubview(addCommentView)
         
         addCommentView.commentTextField.delegate = self
-        addCommentView.postCommentButton.addTarget(self, action: #selector(postComment), for: .touchUpInside)
-       
-        // IN PROGRESS
+            addCommentView.postCommentButton.addTarget(self, action: #selector(postComment), for: .touchUpInside)
+        
+        loadTable()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(CommentCell.self, forCellReuseIdentifier: "item")
+        
+        view.addSubview(tableView)
+        
+        // need to add these constraints to be able to see the table
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        // set constraints
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: addCommentView.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        postComment()
+        return true
+    }
+    
+    func loadTable() {
+        // Need to figure out a better way to filter comments
         let headers: HTTPHeaders = [
             "X-Parse-REST-API-Key": PARSE_CLIENT_KEY,
             "X-Parse-Application-Id": PARSE_APP_ID,
@@ -69,78 +97,53 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
                 self?.tableView.reloadData()
             }
             
-//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-////                                print("Data: \(utf8Text)")
-//
-//            }
-            
         }
-        
-        // Do any additional setup after loading the view.
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(CommentCell.self, forCellReuseIdentifier: "item")
-        
-        view.addSubview(tableView)
-        
-        // need to add constraints to be able to see the table
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        // set constraints
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: addCommentView.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        postComment()
-        return true
     }
     
     @objc func postComment() {
-        var dict: [String: Any] = [
-//            "updatedAt": "2018-01-13T21:18:13.964Z",
-//            "objectId": "MQwpyZz2MG",
-            "comment": String(describing: addCommentView.commentTextField.text),
-            "author": [
-//                "ACL": [
-//                    "*": [
-//                        "read": 1
-//                    ],
-//                "AklIHGtwPl": [
-//                    "read": 1,
-//                    "write": 1
-//                ]
-//            ],
-//                "__type": "Object",
-//                "className": "_User",
-//                "createdAt": "2017-11-13T05:05:56.130Z",
-                "objectId": "AklIHGtwPl",
-//                "updatedAt": "2017-11-13T05:06:59.516Z",
-                "userImage": [
-                    "__type": "File",
-                    "name": "e22bad268597fe48d1136f827423e353_meinart.jpg",
-                    "url": "http://13.57.36.150:80/parse/files/6011eeafaa1dfa09153cb22d970aa077791aeb1f/e22bad268597fe48d1136f827423e353_meinart.jpg"
-                    ],
-                "username": "testcommenter"
-            ],
-            "snack": [
-                "__type": "Pointer",
-                "className": "Snacks",
-                "objectId": "5jsFAPTaLF"
-            ],
-            "createdAt": "2018-01-16T05:40:17.114Z"
-        ]
-        self.commentList.append(dict)
-        viewDidLoad()
-        print(commentList)
+        if addCommentView.commentTextField.text != "" {
+            commentList = [[String: Any]]()
+            if let commentField = addCommentView.commentTextField.text {
+                newComment = commentField
+            }
+            let commentAuthor = "AklIHGtwPl"
+            let commentSnack = "5jsFAPTaLF"
+            let dict: [String: Any] = [
+                "comment": newComment,
+                "author": [
+                    "__type": "Pointer",
+                    "className": "_User",
+                    "objectId": commentAuthor
+                ],
+                "snack": [
+                    "__type": "Pointer",
+                    "className": "Snacks",
+                    "objectId": commentSnack
+                ]
+            ]
+
+            let headers: HTTPHeaders = [
+                "X-Parse-REST-API-Key": PARSE_CLIENT_KEY,
+                "X-Parse-Application-Id": PARSE_APP_ID,
+                "Accept": "application/json",
+                ]
+            
+            Alamofire.request("http://13.57.36.150:80/parse/classes/Comments", method: .post, parameters: dict, encoding: JSONEncoding.default, headers: headers)
+    //            .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+    //                print("Progress: \(progress.fractionCompleted)")
+    //            }
+    //            .validate { request, response, data in
+    //                // Custom evaluation closure now includes data (allows you to parse data to dig out error messages if necessary)
+    //                return .success
+    //            }
+    //            .responseJSON { response in
+    //                debugPrint(response)
+    //        }
+            DispatchQueue.main.async {
+                self.addCommentView.commentTextField.text = ""
+                self.loadTable()
+            }
+        }
     }
 }
 
