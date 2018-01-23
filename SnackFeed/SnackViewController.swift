@@ -57,6 +57,10 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
         tableView.bottomAnchor.constraint(equalTo: addCommentView.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -145,6 +149,34 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+//    deinit {
+//        NotificationCenter.default.removeObserver(self)
+//    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let keyboardHeight = view.convert(keyboardFrame, from:nil).size.height
+        let keyboardAnimationDuration = ((notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0)
+        
+        UIView.animate(withDuration: keyboardAnimationDuration, delay: 0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+            self.addCommentView.frame = CGRect(x: 0, y: self.view.frame.size.height - (keyboardHeight + 60), width: self.view.frame.size.width, height: 60)
+            self.view.layoutIfNeeded()
+        }) { (complete) in
+            //
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let keyboardAnimationDuration = ((notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0)
+        
+        UIView.animate(withDuration: keyboardAnimationDuration, delay: 0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+            self.addCommentView.frame = CGRect(x: 0, y: self.view.frame.size.height - 60, width: self.view.frame.size.width, height: 60)
+            self.view.layoutIfNeeded()
+        }) { (complete) in
+            //
+        }
+    }
 }
 
 
@@ -195,8 +227,6 @@ extension SnackViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
-        // look up automatic height dimension
-//    will have to set constraints for all sides (top, bottom, leading trailing
     }
     
     func loadHeader() {
@@ -230,7 +260,6 @@ extension SnackViewController: UITableViewDelegate, UITableViewDataSource {
                 header.usernameLabel.text = String(describing: usernameDisplay)
                 header.thanksCountLabel.text = String(describing: thanksCount)
                 header.yumCountLabel.text = String(describing: yumsCount)
-                
                 header.commentCountLabel.text = String(describing: commentList.count)
             }
         }
@@ -238,6 +267,7 @@ extension SnackViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension UIViewController {
+    
     func hideKeyboardWhenTapped() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
