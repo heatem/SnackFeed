@@ -111,7 +111,7 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
                 newComment = commentField
             }
             let commentAuthor = "AklIHGtwPl"
-            let commentSnack = "5jsFAPTaLF"
+            let commentSnack = snack["objectId"] as? String
             let dict: [String: Any] = [
                 "comment": newComment,
                 "author": [
