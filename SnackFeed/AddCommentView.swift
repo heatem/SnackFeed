@@ -28,7 +28,6 @@ class AddCommentView: UIView, UITextFieldDelegate {
         button.layer.cornerRadius = 10
         button.setTitleColor(UIColor.yellow, for: .normal)
         button.setTitle("Post", for: .normal)
-        
         return button
     }()
     

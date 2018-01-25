@@ -15,5 +15,7 @@ class FeedNavigationController: UINavigationController {
         super.viewDidLoad()
         
         viewControllers = [feedVC]
+        
+//        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
     }
 }

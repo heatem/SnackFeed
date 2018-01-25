@@ -20,6 +20,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         title = "SnackFeed"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSnack))
         
         let headers: HTTPHeaders = [
             "X-Parse-REST-API-Key": PARSE_CLIENT_KEY,
@@ -127,5 +128,10 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         return cell
+    }
+    
+    @objc func addSnack() {
+        let addSnackViewController = AddSnackViewController()
+        navigationController?.pushViewController(addSnackViewController, animated: true)
     }
 }

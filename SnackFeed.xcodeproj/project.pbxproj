@@ -14,6 +14,7 @@
 		AE20BD3B1FCBDAF100BAE0F4 /* SnackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE20BD3A1FCBDAF100BAE0F4 /* SnackView.swift */; };
 		AE3B9A471FAAD17200C37543 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3B9A461FAAD17200C37543 /* Keys.swift */; };
 		AE661B7C1FD9249A002E6B7C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE661B7B1FD9249A002E6B7C /* CommentCell.swift */; };
+		AE8B92CD2017BC4800B839B7 /* AddSnackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8B92CC2017BC4800B839B7 /* AddSnackViewController.swift */; };
 		AEC728232007E6C200DD76F8 /* AddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC728222007E6C200DD76F8 /* AddCommentView.swift */; };
 		AEC897411F82F7A60099E07B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897401F82F7A60099E07B /* AppDelegate.swift */; };
 		AEC897431F82F7A60099E07B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897421F82F7A60099E07B /* FeedViewController.swift */; };
@@ -55,6 +56,7 @@
 		AE20BD3A1FCBDAF100BAE0F4 /* SnackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackView.swift; sourceTree = "<group>"; };
 		AE3B9A461FAAD17200C37543 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		AE661B7B1FD9249A002E6B7C /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		AE8B92CC2017BC4800B839B7 /* AddSnackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSnackViewController.swift; sourceTree = "<group>"; };
 		AEC728222007E6C200DD76F8 /* AddCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentView.swift; sourceTree = "<group>"; };
 		AEC8973D1F82F7A60099E07B /* SnackFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnackFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC897401F82F7A60099E07B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				AEC897471F82F7A60099E07B /* SnackFeed.xcdatamodeld */,
 				AEE2F2401F9C680600F9F88C /* SnackFeed.ttf */,
 				AE3B9A461FAAD17200C37543 /* Keys.swift */,
+				AE8B92CC2017BC4800B839B7 /* AddSnackViewController.swift */,
 			);
 			path = SnackFeed;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				AEC897491F82F7A60099E07B /* SnackFeed.xcdatamodeld in Sources */,
 				AE20BD391FCB7EA700BAE0F4 /* Date+TimeAgo.swift in Sources */,
 				AE20BD331FC91E7800BAE0F4 /* SnackViewController.swift in Sources */,
+				AE8B92CD2017BC4800B839B7 /* AddSnackViewController.swift in Sources */,
 				AEC728232007E6C200DD76F8 /* AddCommentView.swift in Sources */,
 				AEEF830D1FA2F113009F307D /* UIColor.swift in Sources */,
 			);

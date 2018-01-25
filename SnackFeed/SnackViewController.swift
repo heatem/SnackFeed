@@ -40,7 +40,7 @@ class SnackViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(addCommentView)
         
         addCommentView.commentTextField.delegate = self
-            addCommentView.postCommentButton.addTarget(self, action: #selector(postComment), for: .touchUpInside)
+        addCommentView.postCommentButton.addTarget(self, action: #selector(postComment), for: .touchUpInside)
         
         loadTable()
         
