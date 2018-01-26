@@ -45,5 +45,9 @@
 	<array>
 		<string>SnackFeed.ttf</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Enable the camera to take fresh photos of your delicious snack.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This allows you to select a photo you&apos;ve already taken of your delicious snack.</string>
 </dict>
 </plist>

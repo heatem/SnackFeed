@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddSnackViewController: UIViewController {
+class AddSnackViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     let snackImageView: UIImageView = {
         let snackImage = UIImageView()
@@ -39,6 +39,16 @@ class AddSnackViewController: UIViewController {
         button.setTitle("p", for: .normal)
         return button
     }()
+    
+    let cameraButton: UIButton = {
+        let button = UIButton()
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor.gray
+        button.layer.cornerRadius = 10
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitle("c", for: .normal)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +61,13 @@ class AddSnackViewController: UIViewController {
         view.addSubview(snackImageView)
         view.addSubview(postSnackButton)
         view.addSubview(photoLibraryButton)
+        view.addSubview(cameraButton)
         
         installConstraints()
         
         postSnackButton.addTarget(self, action: #selector(postSnack), for: .touchUpInside)
         photoLibraryButton.addTarget(self, action: #selector(addImage), for: .touchUpInside)
+        cameraButton.addTarget(self, action: #selector(showCamera), for: .touchUpInside)
 
         // Do any additional setup after loading the view.
     }
@@ -63,14 +75,6 @@ class AddSnackViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @objc func postSnack() {
-        print("post a snack")
-    }
-    
-    @objc func addImage() {
-        print("touched up inside")
     }
     
     func installConstraints() {
@@ -92,7 +96,47 @@ class AddSnackViewController: UIViewController {
         photoLibraryButton.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 100).isActive = true
         photoLibraryButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         photoLibraryButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        cameraButton.translatesAutoresizingMaskIntoConstraints = false
+        cameraButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        cameraButton.topAnchor.constraint(equalTo: snackImageView.bottomAnchor, constant: 100).isActive = true
+        cameraButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        cameraButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
+    
+    @objc func postSnack() {
+        print("post a snack")
+    }
+    
+    @objc func addImage() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imagePickerController.allowsEditing = false
+        self.present(imagePickerController, animated: true, completion: nil)
+        
+        print("touched up inside")
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            snackImageView.image = image
+        } else {
+            print("Error getting image")
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func showCamera() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.camera
+        imagePickerController.allowsEditing = false
+        self.present(imagePickerController, animated: true, completion: nil)
+        
+        print("touched up inside show camera")
+    }
+    
     /*
     // MARK: - Navigation
 
