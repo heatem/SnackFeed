@@ -25,6 +25,7 @@
 		AEC897591F82F7A60099E07B /* SnackFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897581F82F7A60099E07B /* SnackFeedTests.swift */; };
 		AEC897641F82F7A60099E07B /* SnackFeedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897631F82F7A60099E07B /* SnackFeedUITests.swift */; };
 		AEC897721F84811F0099E07B /* SnackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC897711F84811F0099E07B /* SnackCell.swift */; };
+		AECE504820201FDE00790A89 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE504720201FDE00790A89 /* LoginViewController.swift */; };
 		AEE2F2411F9C680700F9F88C /* SnackFeed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEE2F2401F9C680600F9F88C /* SnackFeed.ttf */; };
 		AEEF830D1FA2F113009F307D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF830C1FA2F113009F307D /* UIColor.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 		AEC897631F82F7A60099E07B /* SnackFeedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackFeedUITests.swift; sourceTree = "<group>"; };
 		AEC897651F82F7A60099E07B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEC897711F84811F0099E07B /* SnackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackCell.swift; sourceTree = "<group>"; };
+		AECE504720201FDE00790A89 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AEE2F2401F9C680600F9F88C /* SnackFeed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnackFeed.ttf; sourceTree = "<group>"; };
 		AEEF830C1FA2F113009F307D /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +165,7 @@
 				AEE2F2401F9C680600F9F88C /* SnackFeed.ttf */,
 				AE3B9A461FAAD17200C37543 /* Keys.swift */,
 				AE8B92CC2017BC4800B839B7 /* AddSnackViewController.swift */,
+				AECE504720201FDE00790A89 /* LoginViewController.swift */,
 			);
 			path = SnackFeed;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AECE504820201FDE00790A89 /* LoginViewController.swift in Sources */,
 				AEC897721F84811F0099E07B /* SnackCell.swift in Sources */,
 				AE20BD351FCA93C500BAE0F4 /* FeedNavigationController.swift in Sources */,
 				AEC897431F82F7A60099E07B /* FeedViewController.swift in Sources */,

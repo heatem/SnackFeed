@@ -41,4 +41,5 @@ public extension UIColor {
     public class var mutedGreen: UIColor { return UIColor.hex(value: 0xB0D785) }
     public class var mutedRed: UIColor { return UIColor.hex(value: 0xFF8997) }
     public class var mutedBlue: UIColor { return UIColor.hex(value: 0x7AADE9) }
+    public class var sfYellow: UIColor { return UIColor.hex(value: 0xFED340) }
 }

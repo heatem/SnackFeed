@@ -9,13 +9,12 @@
 import UIKit
 
 class FeedNavigationController: UINavigationController {
-    let feedVC = FeedViewController()
+    let feedVC = LoginViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewControllers = [feedVC]
-        
-//        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        navigationBar.isTranslucent = false
     }
 }
